@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "淘宝分享",
+  "version": "1.0",
+  "description": "一个去跟踪淘宝商品链接分享插件",
+  "permissions": [
+    "tabs",
+    "clipboardWrite"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_title": "淘宝商品链接一键复制"
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+  }
+}
