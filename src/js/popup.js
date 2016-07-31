@@ -3,7 +3,10 @@
  */
 (function(){
     var LINKS = chrome.extension.getBackgroundPage().LINKS;
-    chrome.tabs.query({active: true}, function (oTabs) {
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true
+    }, function (oTabs) {
         var oTab = oTabs[0];
         var sLink =  LINKS[oTab.id];
         document.getElementById('link').innerText = sLink;
