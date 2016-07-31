@@ -1,6 +1,10 @@
 body{
     width: 300px;
 }
+.tip{
+    text-align: center;
+    color: #ff0000;
+}
 .link{
 
 }
@@ -12,4 +16,12 @@ body{
     width: 200px;
     height: 200px;
     margin: 0 auto;
+}
+footer{
+    padding-top: 10px;
+    text-align: center;
+    color: #999999;
+}
+footer .separator{
+    padding: 0 5px;
 }

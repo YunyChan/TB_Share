@@ -18,10 +18,6 @@ chrome.tabs.onUpdated.addListener(function (nTabId, oChangeInfo, oTab) {
     }
 });
 
-// chrome.pageAction.onClicked.addListener(function(oTab){
-//     fCopyToClipboard(fFilterUrl(oTab.url));
-// });
-
 function fCheckUrl(sURL) {
     if(sURL){
         var sHostName = '';
