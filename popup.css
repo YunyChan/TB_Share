@@ -1,0 +1,15 @@
+body{
+    width: 300px;
+}
+.link{
+
+}
+.link span{
+    display: block;
+    text-align: left;
+}
+.QRCode{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}

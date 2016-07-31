@@ -12,7 +12,8 @@
       "19": "icons/icon19.png",
       "38": "icons/icon38.png"
     },
-    "default_title": "淘宝商品链接一键复制"
+    "default_title": "淘宝商品链接一键复制",
+    "default_popup": "popup.html"
   },
   "background": {
     "scripts": ["js/background.js"]

@@ -7,6 +7,9 @@ var SUB_DOMAIN_LIST = [
     'detail'
 ];
 
+var LINK = '';
+var LINKS = {};
+
 chrome.tabs.onUpdated.addListener(function (nTabId, oChangeInfo, oTab) {
     if(fCheckUrl(oTab.url)){
         fOnUrlMatch(oTab);
@@ -15,9 +18,9 @@ chrome.tabs.onUpdated.addListener(function (nTabId, oChangeInfo, oTab) {
     }
 });
 
-chrome.pageAction.onClicked.addListener(function(oTab){
-    fCopyToClipboard(fFilterUrl(oTab.url));
-});
+// chrome.pageAction.onClicked.addListener(function(oTab){
+//     fCopyToClipboard(fFilterUrl(oTab.url));
+// });
 
 function fCheckUrl(sURL) {
     if(sURL){
@@ -60,6 +63,9 @@ function fCheckSearch(sSearch) {
 
 function fOnUrlMatch(oTab) {
     chrome.pageAction.show(oTab.id);
+    var sFilteredLink = fFilterUrl(oTab.url);
+    LINKS[oTab.id] = sFilteredLink;
+    LINK = sFilteredLink;
 }
 
 function fOnUrlNotMatch(oTab) {
@@ -72,13 +78,4 @@ function fFilterUrl(sURL) {
     var sSearch = aURLSections[1];
     var sIDParam = sSearch.match(/(id=\d+)/);
     return sLocation + '?' + sIDParam[1];
-}
-
-function fCopyToClipboard(sText) {
-    var oTempTextArea = document.createElement("textarea");
-    oTempTextArea.textContent = sText;
-    document.body.appendChild(oTempTextArea);
-    oTempTextArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(oTempTextArea);
 }
