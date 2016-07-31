@@ -1,7 +1,10 @@
-var isMatch = false;
-var HOST_LIST = [
+var DOMAIN_LIST = [
     'taobao.com',
     'tmall.com'
+];
+var SUB_DOMAIN_LIST = [
+    'item',
+    'detail'
 ];
 
 chrome.tabs.onUpdated.addListener(function (nTabId, oChangeInfo, oTab) {
@@ -13,25 +16,46 @@ chrome.tabs.onUpdated.addListener(function (nTabId, oChangeInfo, oTab) {
 });
 
 chrome.pageAction.onClicked.addListener(function(oTab){
-    console.log(fFilterUrl(oTab.url));
     fCopyToClipboard(fFilterUrl(oTab.url));
 });
 
 function fCheckUrl(sURL) {
     if(sURL){
         var sHostName = '';
-        var oMatch = sURL.match(/.*:\/\/\/?([^\/]*).*/);
+        var sSearch = /\?/.test(sURL) ? sURL.split('?')[1] : '';
+        var oMatch = sURL.match(/.*:\/\/\/?([^\/]*)/);
         if(oMatch){
             sHostName = oMatch[1];
-            for(var cnt = 0, length = HOST_LIST.length; cnt < length; cnt ++){
-                var oRegExp = new RegExp(HOST_LIST[cnt]);
-                if(oRegExp.test(sHostName)){
-                    return true;
-                }
+            if(fCheckDomain(sHostName) && fCheckSubDomain(sHostName) && fCheckSearch(sSearch)){
+                return true
             }
         }
     }
     return false;
+}
+
+function fCheckDomain(sHostName){
+    for(var cnt = 0, length = SUB_DOMAIN_LIST.length; cnt < length; cnt ++){
+        var oRegExp = new RegExp(SUB_DOMAIN_LIST[cnt]);
+        if(oRegExp.test(sHostName)){
+            return true;
+        }
+    }
+    return false;
+}
+
+function fCheckSubDomain(sHostName) {
+    for(var cnt = 0, length = DOMAIN_LIST.length; cnt < length; cnt ++){
+        var oRegExp = new RegExp(DOMAIN_LIST[cnt]);
+        if(oRegExp.test(sHostName)){
+            return true;
+        }
+    }
+    return false;
+}
+
+function fCheckSearch(sSearch) {
+    return /id=\d/.test(sSearch);
 }
 
 function fOnUrlMatch(oTab) {
