@@ -7,7 +7,6 @@ var SUB_DOMAIN_LIST = [
     'detail'
 ];
 
-var LINK = '';
 var LINKS = {};
 
 chrome.tabs.onUpdated.addListener(function (nTabId, oChangeInfo, oTab) {
@@ -59,9 +58,7 @@ function fCheckSearch(sSearch) {
 
 function fOnUrlMatch(oTab) {
     chrome.pageAction.show(oTab.id);
-    var sFilteredLink = fFilterUrl(oTab.url);
-    LINKS[oTab.id] = sFilteredLink;
-    LINK = sFilteredLink;
+    LINKS[oTab.id] = fFilterUrl(oTab.url);
 }
 
 function fOnUrlNotMatch(oTab) {
