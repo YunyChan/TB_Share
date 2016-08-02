@@ -97,9 +97,15 @@ function fFilterGoodsUrl(sURL) {
 }
 
 function fFilterCommonUrl(sRawURL) {
-    sRawURL = sRawURL.replace(/[&\?]?spm=[\w\.\-]*/, '');
-    sRawURL = sRawURL.replace(/[&\?]?t=\d*/, '');
+    sRawURL = sRawURL.replace(/&?spm=[\w\.\-]*/, '');
+    sRawURL = sRawURL.replace(/&?t=\d*/, '');
     // 来源个人中心的店铺点击
-    sRawURL = sRawURL.replace(/[&\?]?user_number_id=\d*/, '');
+    sRawURL = sRawURL.replace(/&?user_number_id=\d*/, '');
+    var sSearch = fGetUrlSearch(sRawURL);
+    if(sSearch == ''){
+        sRawURL = sRawURL.replace('?', '');
+    }else if(sSearch.charAt(0) == '&'){
+        sRawURL = sRawURL.replace(/&/, '');
+    }
     return sRawURL;
 }

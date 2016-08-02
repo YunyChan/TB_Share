@@ -12,6 +12,11 @@ body{
     display: block;
     text-align: left;
 }
+.link-bd{
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+}
 .QRCode{
     width: 200px;
     height: 200px;
